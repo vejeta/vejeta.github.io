@@ -1,0 +1,76 @@
+
+
+Introduction
+---------------
+
+When I first heard about cucumber, it was in a emacs related post (http://www.47deg.com/blog/scala-development-with-emacs)
+
+There, ldeck asked about using cucumber-scala with emacs... and then after some time I started the research about cucumber.
+
+Let's learn a bit about Cucumber
+
+Definition
+------------
+
+The first thing is to define what cucumber is. According to Wikipedia (https://en.wikipedia.org/wiki/Cucumber_%28software%29)
+Cucumber is used for testing other software through acceptance tests written in a behaviour-driven development style.
+Yes, tests can now be written in plain text, in what are called feature files.
+
+Implementations
+--------------------
+
+* Cucumber original implementation (https://cucumber.io/) is written in Ruby. The project page states that it works with Ruby, Java, .NET, Flex.
+
+* However, that pages forget to mention that there is an implementation than run in emacs: [Ecukes](https://github.com/ecukes/ecukes).
+Ecukes is Cucumber for Emacs and it can be used to test our Emacs packages. Please, notice, Ecukes is very clear about this. Ecukes is not a major mode to help editing cucumber files.
+
+* There is also another implementation in Java that supports "the most popular programming languages for the JVM", including Scala: [cucumber-jvm](https://github.com/cucumber/cucumber-jvm)
+
+Editing Cucumber files
+---------------------------
+
+
+In Emacs we have modes, modes provide things like colouring, syntax completion and additional functionality when
+editing certain kind of files.
+
+We have cucumber.el (https://github.com/michaelklishin/cucumber.el) to edit plain text user stories for cucumber.
+With it, we have nice syntax highlighting and indenting.
+
+
+In IntelliJ, there is this plugin http://plugins.jetbrains.com/plugin/7460?pr=idea, it allows navigation through the steps of the test,
+and also finding usages of the step definitions. See also: https://www.jetbrains.com/idea/help/cucumber.html
+
+For Eclipse, there is: https://github.com/cucumber/cucumber-eclipse
+
+Using cucumber-scala
+--------------------------
+
+
+  To test this I checked out: https://github.com/skipoleschris/xsbt-cucumber-plugin
+
+This project provides the ability to run [cucumber-jvm with Scala)(https://github.com/cucumber/cucumber-jvm) within the SBT environment
+
+Look for the Project Setup Section and update your project/plugins/build.sbt
+
+  It contains some test projects. I copied "testProject" to a new directory and changed project/build.properties
+
+  From
+  >sbt.version=0.13.0
+  
+  to
+  
+  > sbt.version=0.13.9
+
+  so I can use Ensime.
+
+  When you are in a Scala file, type  `C-c C-v s` to launch the sbt console inside emacs.
+
+ And then inside sbt:
+
+  > cucumber
+
+
+See the attached screenshot.
+![enter image description here](https://lh3.googleusercontent.com/-AP8DUsz0uLs/VoP8qPm37cI/AAAAAAAAAEQ/8wXt_O_O1fg/s0/Emacs_SBT_Scala_Cucumber.png "Emacs_SBT_Scala_Cucumber.png")
+
+So, as far as I can see, there would be a nice project to make a mode like [cucumber.el](https://github.com/michaelklishin/cucumber.el) that uses [cucumber-jvm with Scala)(https://github.com/cucumber/cucumber-jvm) that is based on the JVM, instead of the ruby one.
